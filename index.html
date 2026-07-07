@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="VectorLine — convert images into grid-aligned vector-line halftones with true SVG export for print, laser cutting, and pen plotting." />
+    <meta name="color-scheme" content="light" />
+    <title>VectorLine — line-halftone studio</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2316161a'/%3E%3Cpath d='M6 9h20M6 14h20M6 19h20M6 24h20' stroke='%23f5f5f3' stroke-width='2'/%3E%3Cpath d='M19 4 13 28' stroke='%23e8490f' stroke-width='3'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <h1 class="wordmark">VECTOR<span class="slash">/</span>LINE</h1>
+        <div class="topbar-actions">
+          <button id="btn-upload" type="button" class="btn">Upload image</button>
+          <label class="preset-label" for="preset-select">Preset</label>
+          <select id="preset-select" aria-label="Built-in presets">
+            <option value="">—</option>
+          </select>
+          <button id="btn-save-preset" type="button" class="btn btn-quiet">Save preset</button>
+          <button id="btn-load-preset" type="button" class="btn btn-quiet">Load preset</button>
+          <span class="spacer" aria-hidden="true"></span>
+          <button id="btn-copy-svg" type="button" class="btn btn-quiet">Copy SVG</button>
+          <label class="scale-label" for="png-scale">PNG ×</label>
+          <input id="png-scale" type="number" min="1" max="8" step="1" value="2" aria-label="PNG export scale" />
+          <button id="btn-png" type="button" class="btn btn-quiet">PNG</button>
+          <button id="btn-svg" type="button" class="btn btn-primary">Download SVG</button>
+        </div>
+      </header>
+      <main class="workspace">
+        <section class="preview" id="preview" aria-label="Artwork preview">
+          <div class="preview-hud">
+            <button id="btn-fit" type="button" class="btn btn-quiet" title="Fit artwork to view">Fit</button>
+            <output id="stats" class="stats" aria-live="polite"></output>
+          </div>
+          <p id="warning" class="warning" role="status" hidden></p>
+        </section>
+        <aside class="sidebar" id="sidebar" aria-label="Parameters"></aside>
+      </main>
+      <div id="dropzone" class="dropzone" hidden>
+        <p>Drop image to load</p>
+      </div>
+      <input id="file-input" type="file" accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp" hidden />
+      <input id="preset-file-input" type="file" accept=".json,application/json" hidden />
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
