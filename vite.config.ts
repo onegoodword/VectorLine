@@ -1,11 +1,17 @@
 import { defineConfig } from 'vite';
+import { viteSingleFile } from 'vite-plugin-singlefile';
 
-// base is set from BASE_PATH for GitHub Pages project sites
-// (e.g. BASE_PATH=/VectorLine/); defaults to root for local dev.
+// Single build target: one self-contained dist/index.html. All CSS, JS,
+// and the bundled demo image are inlined, so the file opens standalone
+// via file:// and also deploys as-is to GitHub Pages/Netlify/any static host.
 export default defineConfig({
-  base: process.env.BASE_PATH ?? '/',
+  base: './',
+  plugins: [viteSingleFile()],
   build: {
     target: 'es2022',
     sourcemap: false,
+    cssCodeSplit: false,
+    assetsInlineLimit: 100_000_000,
+    chunkSizeWarningLimit: 100_000_000,
   },
 });

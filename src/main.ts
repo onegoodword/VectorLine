@@ -1,4 +1,5 @@
 import './style.css';
+import demoImageUrl from './assets/demo.jpg';
 import type { ModeId, Settings, Unit } from './core/types';
 import { DEFAULT_SETTINGS, cloneSettings } from './core/types';
 import { MODULATORS } from './core/modulators/index';
@@ -280,7 +281,7 @@ function boot(): void {
   window.addEventListener('resize', () => renderer.schedule(store.get()));
 
   // Bundled demo image so the tool is never empty on first visit.
-  void loadImageFromUrl(`${import.meta.env.BASE_URL}demo.jpg`, 'demo')
+  void loadImageFromUrl(demoImageUrl, 'demo')
     .then((src) => {
       if (!renderer.getSource()) {
         renderer.setSource(src);

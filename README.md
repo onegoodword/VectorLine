@@ -13,7 +13,7 @@ npm test         # unit tests (Vitest)
 npm run build    # typecheck + production build → dist/
 ```
 
-Deploys automatically to GitHub Pages on push to `main` (`.github/workflows/deploy.yml`). The workflow sets `BASE_PATH=/<repo>/` for project-site URLs.
+`npm run build` produces a single self-contained `dist/index.html` (via `vite-plugin-singlefile`) — all CSS, JS, and the bundled demo image are inlined, so the file works standalone when opened directly (`file://`) as well as when deployed to a static host. Deploys automatically to GitHub Pages on push to `main` (`.github/workflows/deploy.yml`).
 
 ## Architecture
 
@@ -59,4 +59,4 @@ Modes 2–4 emit single-stroke centerlines with `fill="none"` and round caps —
 
 ## Demo image
 
-Dorothea Lange, *Migrant Mother* (1936) — a U.S. Farm Security Administration photograph, public domain. Bundled at `public/demo.jpg`.
+Dorothea Lange, *Migrant Mother* (1936) — a U.S. Farm Security Administration photograph, public domain. Bundled at `src/assets/demo.jpg`.
