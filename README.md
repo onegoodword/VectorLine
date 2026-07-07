@@ -1,6 +1,6 @@
 # VectorLine
 
-**Line-halftone studio.** Converts raster images into halftone patterns made of grid-aligned vector lines, with every visual aspect exposed as a parameter and true SVG export — suitable for print, laser cutting, and pen plotting.
+**VectorLine studio.** Converts raster images into halftone patterns made of grid-aligned vector lines, with every visual aspect exposed as a parameter and true SVG export — suitable for print, laser cutting, and pen plotting.
 
 Everything runs client-side: no server, no accounts, no image persistence. The on-screen preview *is* the SVG element; what you see is byte-for-byte what you export.
 
