@@ -74,6 +74,10 @@ function buildSidebar(): void {
     slider('Wave frequency', { min: 0.05, max: 5, step: 0.05 }, () => g().line.waveFrequency, (v) => store.set('line', 'waveFrequency', v)),
     slider('Max amplitude', { min: 0, max: 25, step: 0.1 }, () => g().line.maxAmplitude, (v) => store.set('line', 'maxAmplitude', v)),
     slider('Curve smoothing', { min: 0, max: 1, step: 0.01 }, () => g().line.smoothing, (v) => store.set('line', 'smoothing', v)),
+    note(
+      'Stepped Thickness always renders sharp rectangles — curve smoothing has no effect in this mode.',
+      () => g().line.mode === 'steps' && g().line.smoothing > 0,
+    ),
     slider('Threshold floor', { min: 0, max: 1, step: 0.01 }, () => g().line.thresholdFloor, (v) => store.set('line', 'thresholdFloor', v)),
     slider('Threshold ceiling', { min: 0, max: 1, step: 0.01 }, () => g().line.thresholdCeiling, (v) => store.set('line', 'thresholdCeiling', v)),
     slider('Jitter', { min: 0, max: 1, step: 0.01 }, () => g().line.jitter, (v) => store.set('line', 'jitter', v)),

@@ -92,6 +92,18 @@ describe('steps', () => {
     expect(hasRiser).toBe(true);
     expect(hasPlateau).toBe(true);
   });
+  it('never emits curves, even at high smoothing (sharp rectangles always)', () => {
+    const rp = MODULATORS.steps.renderRun(
+      makeRun([0.1, 0.9, 0.2, 1, 0.5]),
+      ctx({ smoothing: 1, steps: 4 }),
+    );
+    expect(rp!.d).not.toContain('C');
+  });
+  it('merges equal-level neighbours into one plateau (no redundant vertices)', () => {
+    // 6 samples, all the same level → a single plateau: 2 top + 2 bottom = 4 pts
+    const rp = MODULATORS.steps.renderRun(makeRun([1, 1, 1, 1, 1, 1]), ctx({ smoothing: 0 }));
+    expect(rp!.points).toBe(4);
+  });
   it('run boundary caps stay flush with the first/last sample, no overshoot', () => {
     const rp = MODULATORS.steps.renderRun(makeRun([1, 1, 1], 2), ctx({ smoothing: 0 }));
     const xs = [...rp!.d.matchAll(/[ML](-?[\d.]+) -?[\d.]+/g)].map((m) => Number(m[1]));
