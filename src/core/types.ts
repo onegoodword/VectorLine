@@ -1,6 +1,6 @@
 /** All settings that define an artwork. Serializable, deterministic. */
 
-export type ModeId = 'thickness' | 'amplitude' | 'frequency' | 'dashes';
+export type ModeId = 'thickness' | 'steps' | 'amplitude' | 'frequency' | 'dashes';
 export type Unit = 'mm' | 'px';
 
 export interface GridSettings {
@@ -22,6 +22,8 @@ export interface LineSettings {
   minWidth: number;
   /** Ribbon width at d=1 (thickness mode). */
   maxWidth: number;
+  /** Discrete width levels for the steps mode, 2–50. */
+  steps: number;
   /** Cycles per spacing unit of distance along the line. */
   waveFrequency: number;
   /** Peak wave amplitude, artwork units. */
@@ -77,6 +79,7 @@ export const DEFAULT_SETTINGS: Settings = {
     mode: 'thickness',
     minWidth: 0.2,
     maxWidth: 5,
+    steps: 5,
     waveFrequency: 0.6,
     maxAmplitude: 2.4,
     smoothing: 0.6,

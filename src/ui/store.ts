@@ -1,3 +1,4 @@
+import { MODULATORS } from '../core/modulators/index';
 import { cloneSettings, DEFAULT_SETTINGS, type Settings } from '../core/types';
 
 export type Listener = (settings: Settings) => void;
@@ -58,8 +59,7 @@ export function coerceSettings(raw: unknown): Settings {
     }
   }
   // guard enum fields
-  const modes = ['thickness', 'amplitude', 'frequency', 'dashes'];
-  if (!modes.includes(out.line.mode)) out.line.mode = 'thickness';
+  if (!(out.line.mode in MODULATORS)) out.line.mode = 'thickness';
   if (out.output.unit !== 'mm' && out.output.unit !== 'px') out.output.unit = 'mm';
   return out;
 }

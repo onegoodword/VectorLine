@@ -1,5 +1,6 @@
 import type { LineSettings, ModeId, PathKind, Run } from '../types';
 import { thickness } from './thickness';
+import { steppedThickness } from './stepped-thickness';
 import { amplitude } from './amplitude';
 import { frequency } from './frequency';
 import { dashes } from './dashes';
@@ -33,6 +34,7 @@ export interface Modulator {
 
 export const MODULATORS: Record<ModeId, Modulator> = {
   thickness,
+  steps: steppedThickness,
   amplitude,
   frequency,
   dashes,

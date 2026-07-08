@@ -48,7 +48,7 @@ The grid lives in artwork space (the SVG viewBox), rotated by the grid angle aro
 
 ### Plotter mode
 
-Modes 2–4 emit single-stroke centerlines with `fill="none"` and round caps — directly usable by AxiDraw-class plotters. Thickness mode is inherently fill-based (variable-width ribbons); in plotter mode it falls back to uniform-width centerlines, and the UI states this.
+Wave amplitude, wave frequency, and dash density emit single-stroke centerlines with `fill="none"` and round caps — directly usable by AxiDraw-class plotters. Thickness and Stepped Thickness are inherently fill-based (variable-width ribbons); in plotter mode they fall back to uniform-width centerlines, and the UI states this.
 
 ## Export
 
