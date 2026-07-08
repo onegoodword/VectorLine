@@ -75,6 +75,29 @@ describe('steps', () => {
     const distinct = new Set(ys);
     expect(distinct).toEqual(new Set([0.5, 2.5])); // half-widths of minWidth=1, maxWidth=5
   });
+  it('steps between levels as a right-angle riser, not a diagonal taper', () => {
+    const rp = MODULATORS.steps.renderRun(
+      makeRun([0, 0, 1, 1]),
+      ctx({ smoothing: 0, minWidth: 2, maxWidth: 10, steps: 2 }),
+    );
+    const coords = [...rp!.d.matchAll(/[ML](-?[\d.]+) (-?[\d.]+)/g)].map(
+      (m) => [Number(m[1]), Number(m[2])] as const,
+    );
+    const hasRiser = coords.some(
+      (p, i) => i > 0 && p[0] === coords[i - 1]![0] && p[1] !== coords[i - 1]![1],
+    );
+    const hasPlateau = coords.some(
+      (p, i) => i > 0 && p[1] === coords[i - 1]![1] && p[0] !== coords[i - 1]![0],
+    );
+    expect(hasRiser).toBe(true);
+    expect(hasPlateau).toBe(true);
+  });
+  it('run boundary caps stay flush with the first/last sample, no overshoot', () => {
+    const rp = MODULATORS.steps.renderRun(makeRun([1, 1, 1], 2), ctx({ smoothing: 0 }));
+    const xs = [...rp!.d.matchAll(/[ML](-?[\d.]+) -?[\d.]+/g)].map((m) => Number(m[1]));
+    expect(Math.min(...xs)).toBe(0);
+    expect(Math.max(...xs)).toBe(4);
+  });
   it('falls back to centerline strokes in plotter mode', () => {
     const rp = MODULATORS.steps.renderRun(makeRun([1, 1, 1]), ctx({ plotterMode: true, smoothing: 0 }));
     expect(rp!.d.endsWith('Z')).toBe(false);
